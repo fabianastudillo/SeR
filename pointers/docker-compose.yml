@@ -1,0 +1,22 @@
+#version: "3"
+
+services:
+    pointers:
+        image: gcc
+        container_name: pointers
+        hostname: pointers
+        tty: true
+        cap_add:
+                - ALL
+        privileged: true
+        volumes:
+                - ./volumes:/volumes
+        network_mode: host
+                  
+networks:
+    net-10.9.0.0:
+        name: net-10.9.0.0
+        ipam:
+            config:
+                - subnet: 10.9.0.0/24
+
