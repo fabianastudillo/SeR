@@ -6,6 +6,8 @@ int suma(int a, int b);
 // Definición de la función suma
 int suma(int a, int b) {
     int c = a + b;
+    a = 10;
+    b = 11;
     return c;
 }
 
