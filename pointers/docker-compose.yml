@@ -2,7 +2,8 @@
 
 services:
     pointers:
-        image: gcc
+#        image: gcc
+        build: .
         container_name: pointers
         hostname: pointers
         tty: true
@@ -10,13 +11,13 @@ services:
                 - ALL
         privileged: true
         volumes:
-                - ./volumes:/volumes
+                - ../SniffingAndSpoofing/volumes:/volumes
         network_mode: host
                   
-networks:
-    net-10.9.0.0:
-        name: net-10.9.0.0
-        ipam:
-            config:
-                - subnet: 10.9.0.0/24
+# networks:
+#     net-10.9.0.0:
+#         name: net-10.9.0.0
+#         ipam:
+#             config:
+#                 - subnet: 10.9.0.0/24
 

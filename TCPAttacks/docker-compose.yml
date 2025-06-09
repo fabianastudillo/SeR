@@ -2,10 +2,8 @@
 
 services:
     attacker:
-#        build: .
-        image: fabianastudillo/ubuntu-ser:latest  # Optional: tag the built image
-#        image: handsonsecurity/seed-ubuntu:large
-        container_name: attacker
+        image: fabianastudillo/ubuntu-ser:latest
+        container_name: seed-attacker
         hostname: attacker
         tty: true
         cap_add:
@@ -15,35 +13,54 @@ services:
                 - ./volumes:/volumes
         network_mode: host
 
-    hostA:
- #       build: .
+
+    Victim:
         image: fabianastudillo/ubuntu-ser:latest
-        container_name: hostA-10.9.0.5
-        hostname: hostA
+        container_name: victim-10.9.0.5
+        hostname: victim
         tty: true
         cap_add:
                 - ALL
+        privileged: true
+        sysctls:
+                - net.ipv4.tcp_syncookies=0
+
         networks:
             net-ser:
                 ipv4_address: 10.9.0.5
+
 #        command: bash -c "
 #                      /etc/init.d/openbsd-inetd start  &&
 #                      tail -f /dev/null
 #                 "
-
-
-    hostB:
-#        build: .
+                  
+    User1:
         image: fabianastudillo/ubuntu-ser:latest
-#        image: handsonsecurity/seed-ubuntu:large
-        container_name: hostB-10.9.0.6
-        hostname: hostB
+        container_name: user1-10.9.0.6
+        hostname: user1
         tty: true
         cap_add:
                 - ALL
         networks:
             net-ser:
                 ipv4_address: 10.9.0.6
+
+#        command: bash -c "
+#                      /etc/init.d/openbsd-inetd start  &&
+#                      tail -f /dev/null
+#                 "
+
+    User2:
+        image: fabianastudillo/ubuntu-ser:latest
+        container_name: user2-10.9.0.7
+        hostname: user2
+        tty: true
+        cap_add:
+                - ALL
+        networks:
+            net-ser:
+                ipv4_address: 10.9.0.7
+
 #        command: bash -c "
 #                      /etc/init.d/openbsd-inetd start  &&
 #                      tail -f /dev/null
